@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Settings from './src/pages/SettingStack';
-import Orders from './src/pages/Orders';
+import Orders from './src/pages/FriendStack';
 import Map from './src/pages/Map';
 import {useEffect, useState} from 'react';
 import SignIn from './src/pages/SignIn';
@@ -12,19 +12,20 @@ import SplashScreen from 'react-native-splash-screen';
 import {Text, View} from 'react-native';
 import Location from './src/pages/Location';
 import WishList from './src/pages/WishList';
-import Friend from './src/pages/Friend';
+import Friend from './src/pages/FriendStack';
 import {Alert, Linking, Platform} from 'react-native';
 import {check, PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 import StackContainer from './src/pages/StackContainer';
 import Home from './src/pages/Home';
 import Feather from 'react-native-vector-icons/Feather';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import UserInfo from './src/pages/UserInfo';
 import SettingStack from './src/pages/SettingStack';
 import KakaoLogin from './src/pages/KakaoLogin';
 import GoogleLogin from './src/pages/GoogleLogin';
+import {AuthProvider} from './src/contexts/AuthContext';
+import FriendStack from './src/pages/FriendStack';
 export type LoggedInParamList = {
-  Orders: undefined;
   Settings: undefined;
   Delivery: undefined;
   Complete: {orderId: string};
@@ -128,51 +129,56 @@ function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      {/* //   {isLoggedIn ? ( */}
-      <Tab.Navigator>
-        <Tab.Screen
-          name="StackContiner"
-          component={StackContainer}
-          options={{
-            headerShown: false,
-            tabBarLabel: 'Home',
-            tabBarIcon: () => <Feather name="home" size={20} color="black" />,
-          }}
-        />
-        <Tab.Screen
-          name="지도"
-          component={Map}
-          options={{
-            headerShown: false,
-            tabBarLabel: '지도',
-            headerTitleAlign: 'center',
-            tabBarIcon: () => (
-              <Feather name="map-pin" size={20} color="black" />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Location"
-          component={Orders}
-          options={{
-            headerShown: false,
-            tabBarLabel: '위치테스트',
-          }}
-        />
-        <Tab.Screen
-          name="세팅"
-          component={SettingStack}
-          options={{
-            headerShown: false,
-            tabBarLabel: 'setting',
-            tabBarIcon: () => (
-              <Feather name="settings" size={20} color="black" />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-      {/* //   ) : (
+    <AuthProvider>
+      <NavigationContainer>
+        {/* //   {isLoggedIn ? ( */}
+        <Tab.Navigator>
+          <Tab.Screen
+            name="StackContiner"
+            component={StackContainer}
+            options={{
+              headerShown: false,
+              tabBarLabel: 'Home',
+              tabBarIcon: () => <Feather name="home" size={20} color="black" />,
+            }}
+          />
+          <Tab.Screen
+            name="지도"
+            component={Map}
+            options={{
+              headerShown: false,
+              tabBarLabel: '지도',
+              headerTitleAlign: 'center',
+              tabBarIcon: () => (
+                <Feather name="map-pin" size={20} color="black" />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="friendStack"
+            component={FriendStack}
+            options={{
+              headerShown: false,
+              tabBarLabel: '친구',
+              headerTitleAlign: 'center',
+              tabBarIcon: () => (
+                <FontAwesome5 name="user-friends" size={20} color="black" />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="세팅"
+            component={SettingStack}
+            options={{
+              headerShown: false,
+              tabBarLabel: '설정',
+              tabBarIcon: () => (
+                <Feather name="settings" size={20} color="black" />
+              ),
+            }}
+          />
+        </Tab.Navigator>
+        {/* //   ) : (
     //     <Stack.Navigator>
     //       <Stack.Screen
     //         name="SignIn"
@@ -186,7 +192,8 @@ function App() {
     //       <Stack.Screen name="GoogleLogin" component={GoogleLogin} />
     //     </Stack.Navigator>
     //   )} */}
-    </NavigationContainer> //로그인을 했으면 탭 네비게이터만 보임
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 

@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import {SafeAreaView, Pressable, Text, View, Button} from 'react-native';
 import WishList from './WishList';
-import Friend from './Friend';
+import Friend from './FriendStack';
 import Home from './Home';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import UserInfo from './UserInfo';
@@ -13,8 +13,6 @@ import ProfileChange from './ProfileChange';
 import SignIn from './SignIn';
 import KakaoLogin from './KakaoLogin';
 import GoogleLogin from './GoogleLogin';
-import WishList2 from './WishList2';
-import WishList3 from './WishList3';
 
 const Stack = createNativeStackNavigator();
 function StackContainer() {
@@ -67,6 +65,7 @@ function StackContainer() {
           headerShown: true,
         }}
       />
+
       <Stack.Screen name="KakaoLogin" component={KakaoLogin} />
       <Stack.Screen name="GoogleLogin" component={GoogleLogin} />
       <Stack.Screen
@@ -89,34 +88,6 @@ function StackContainer() {
       <Stack.Screen
         name="WishList"
         component={WishList}
-        options={{
-          title: '위시리스트',
-          headerShown: true,
-          headerTitleAlign: 'center',
-          headerTintColor: 'black',
-          headerTitleStyle: {
-            fontWeight: '700',
-            fontSize: 15,
-          },
-        }}
-      />
-      <Stack.Screen
-        name="WishList2"
-        component={WishList2}
-        options={{
-          title: '위시리스트',
-          headerShown: true,
-          headerTitleAlign: 'center',
-          headerTintColor: 'black',
-          headerTitleStyle: {
-            fontWeight: '700',
-            fontSize: 15,
-          },
-        }}
-      />
-      <Stack.Screen
-        name="WishList3"
-        component={WishList3}
         options={{
           title: '위시리스트',
           headerShown: true,

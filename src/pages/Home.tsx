@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import WishList from './WishList';
-import Friend from './Friend';
+import Friend from './FriendStack';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const Stack = createNativeStackNavigator();

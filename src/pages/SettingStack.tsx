@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import {SafeAreaView, Pressable, Text, View, Button} from 'react-native';
 import WishList from './WishList';
-import Friend from './Friend';
+import Friend from './FriendStack';
 import Home from './Home';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import UserInfo from './UserInfo';

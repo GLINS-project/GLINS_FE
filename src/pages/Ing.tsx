@@ -12,11 +12,11 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import Orders from './Orders';
+
 import NaverMapView, {Marker, Path} from 'react-native-nmap';
 
-import GeoLocationAPI from './Orders';
 import Geolocation from '@react-native-community/geolocation';
+import WebView from 'react-native-webview';
 function SerchBar() {
   return (
     <View
@@ -170,91 +170,98 @@ function Ing() {
   // );
   //}
   return (
-    <View>
-      <SerchBar />
+    // <View>
+    //   <SerchBar />
 
-      <View
-        style={{
-          width: Dimensions.get('window').width - 20,
-          borderColor: '#29b6f6',
-          borderWidth: 1,
+    //   <View
+    //     style={{
+    //       width: Dimensions.get('window').width - 20,
+    //       borderColor: '#29b6f6',
+    //       borderWidth: 1,
 
-          borderRadius: 10,
-          height: 400,
-          marginTop: 0,
-          alignSelf: 'center',
-          padding: 5,
-        }}>
-        <NaverMapView
-          useTextureView={true}
-          style={{width: '100%', height: '100%'}}
-          zoomControl={false}
-          showsMyLocationButton={true}
-          scaleBar={true}
-          center={{
-            zoom: 16,
-            tilt: 0,
-            latitude: latitude,
-            longitude: longitude,
-          }}>
-          <Marker
-            coordinate={{
-              latitude: latitude,
-              longitude: longitude,
-            }}
-            pinColor="blue"
-            width={30}
-            height={30}
-          />
+    //       borderRadius: 10,
+    //       height: 400,
+    //       marginTop: 0,
+    //       alignSelf: 'center',
+    //       padding: 5,
+    //     }}>
+    //     <NaverMapView
+    //       useTextureView={true}
+    //       style={{width: '100%', height: '100%'}}
+    //       zoomControl={false}
+    //       showsMyLocationButton={true}
+    //       scaleBar={true}
+    //       center={{
+    //         zoom: 16,
+    //         tilt: 0,
+    //         latitude: latitude,
+    //         longitude: longitude,
+    //       }}>
+    //       <Marker
+    //         coordinate={{
+    //           latitude: latitude,
+    //           longitude: longitude,
+    //         }}
+    //         pinColor="blue"
+    //         width={30}
+    //         height={30}
+    //       />
 
-          <Marker
-            coordinate={{latitude: 37.557511, longitude: 126.943255}}
-            caption={{text: '더 포스짐'}}
-          />
-        </NaverMapView>
-        <View style={{position: 'absolute'}}>
-          <View>
-            <Pressable
-              style={{
-                borderWidth: 0,
-                width: 30,
-                height: 30,
-                marginLeft: 28.5,
-                marginTop: 311.5,
-                position: 'absolute',
-              }}
-              onPress={() => {
-                // PushNotification.localNotification({
-                //   channelId: 'glins_notification_id',
-                //   title: '위시리스트 알림',
-                //   message:
-                //     "지정된 위시리스트 '무라 홍대점'가(이) 근방 500m에 있습니다 .",
-                // });
+    //       <Marker
+    //         coordinate={{latitude: 37.557511, longitude: 126.943255}}
+    //         caption={{text: '더 포스짐'}}
+    //       />
+    //     </NaverMapView>
+    //     <View style={{position: 'absolute'}}>
+    //       <View>
+    //         <Pressable
+    //           style={{
+    //             borderWidth: 0,
+    //             width: 30,
+    //             height: 30,
+    //             marginLeft: 28.5,
+    //             marginTop: 311.5,
+    //             position: 'absolute',
+    //           }}
+    //           onPress={() => {
+    //             // PushNotification.localNotification({
+    //             //   channelId: 'glins_notification_id',
+    //             //   title: '위시리스트 알림',
+    //             //   message:
+    //             //     "지정된 위시리스트 '무라 홍대점'가(이) 근방 500m에 있습니다 .",
+    //             // });
 
-                handleClick();
-                console.log(latitude);
-                Geolocation.getCurrentPosition(
-                  position => {
-                    const latitude1 = position.coords.latitude;
-                    const longitude1 = position.coords.longitude;
-                    //setLatitude(latitude1);
-                    //setLongitude(longitude1);
-                    reallat = Number(latitude);
-                    reallongt = Number(longitude);
+    //             handleClick();
+    //             console.log(latitude);
+    //             Geolocation.getCurrentPosition(
+    //               position => {
+    //                 const latitude1 = position.coords.latitude;
+    //                 const longitude1 = position.coords.longitude;
+    //                 //setLatitude(latitude1);
+    //                 //setLongitude(longitude1);
+    //                 reallat = Number(latitude);
+    //                 reallongt = Number(longitude);
 
-                    console.log(reallat);
-                    console.log(typeof reallat);
-                  },
-                  error => {
-                    console.log('error.code, error.message');
-                  },
-                  {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-                );
-              }}></Pressable>
-          </View>
-        </View>
-      </View>
-    </View>
+    //                 console.log(reallat);
+    //                 console.log(typeof reallat);
+    //               },
+    //               error => {
+    //                 console.log('error.code, error.message');
+    //               },
+    //               {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+    //             );
+    //           }}></Pressable>
+    //       </View>
+    //     </View>
+    //   </View>
+    // </View>
+    <WebView
+      source={{
+        //uri: 'http://tablog.neocities.org/keywordposition_m',
+        uri: 'http://192.168.0.25:8080', //python -m SimpleHTTPServer 8000
+      }}
+      style={{flex: 1}}
+    />
   );
 }
 
